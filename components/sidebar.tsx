@@ -10,9 +10,9 @@ import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
 import { CodeIcon, HomeIcon, ImageIcon,
-    LayoutDashboard,
+    // LayoutDashboard,
     MessageCircle,
-    MessageSquare, 
+    // MessageSquare, 
     MusicIcon, 
     Settings2Icon, 
     VideoIcon} from "lucide-react";
