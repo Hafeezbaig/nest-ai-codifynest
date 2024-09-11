@@ -11,8 +11,8 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { CodeIcon, HomeIcon, ImageIcon,
     // LayoutDashboard,
-    MessageCircle,
-    // MessageSquare, 
+    MessageSquare, 
+    MessageSquareCode, 
     MusicIcon, 
     Settings2Icon, 
     VideoIcon} from "lucide-react";
@@ -33,32 +33,37 @@ const routes = [
         color: "text-sky-500"
     },
     {
-        label: "Conversation",
-        // icon: MessageSquare,
-        icon: MessageCircle,
-        href: "/conversation",
+        label: "Nest Chat",
+        icon: MessageSquare,
+        href: "/chat",
         color: "text-indigo-500"
     },
     {
-        label: "Image Generation",
+        label: "Nest Pro Chat",
+        icon: MessageSquareCode,
+        href: "/pro-chat",
+        color: "text-blue-500"
+    },
+    {
+        label: "Image Studio",
         icon: ImageIcon,
-        href: "/image",
+        href: "/image-studio",
         color: "text-purple-500"
     },
     {
-        label: "Video Generation",
+        label: "Video Studio",
         icon: VideoIcon,
-        href: "/video",
+        href: "/video-studio",
         color: "text-orange-500"
     },
     {
-        label: "Music Generation",
+        label: "Sound Studio",
         icon: MusicIcon,
-        href: "/music",
+        href: "/sound-studio",
         color: "text-cyan-500"
     },
     {
-        label: "Code Generation",
+        label: "Code Builder",
         icon: CodeIcon,
         href: "/code",
         color: "text-emerald-500"

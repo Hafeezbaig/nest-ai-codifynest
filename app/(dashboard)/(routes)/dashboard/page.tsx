@@ -2,41 +2,48 @@
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ImageIcon, MessageCircle, VideoIcon, MusicIcon, CodeIcon } from "lucide-react";
+import { ArrowRight, ImageIcon, MessageSquare, MessageSquareCode, VideoIcon, MusicIcon, CodeIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const tools = [
 
 {
-    label: "Conversation",
-    icon: MessageCircle,
+    label: "Nest Chat",
+    icon: MessageSquare,
     color: "text-indigo-500",
     bgColor: "bg-indigo-500/10",
-    href: "/conversation"
+    href: "/chat"
+},   
+{
+    label: "Nest Pro Chat",
+    icon: MessageSquareCode,
+    color: "text-blue-500",
+    bgColor: "bg-blue-500/10",
+    href: "/pro-chat"
 },
 {
-    label: "Image Generation",
+    label: "Image Studio",
     icon: ImageIcon,
     color: "text-purple-500",
     bgColor: "bg-purple-500/10",
-    href: "/image"
+    href: "/image-studio"
 },
 {
-    label: "Video Generation",
+    label: "Video Studio",
     icon: VideoIcon,
     color: "text-orange-500",
     bgColor: "bg-orange-500/10",
-    href: "/video"
+    href: "/video-studio"
 },
 {
-    label: "Music Generation",
+    label: "Sound Studio",
     icon: MusicIcon,
     color: "text-cyan-500",
     bgColor: "bg-cyan-500/10",
-    href: "/music"
+    href: "/sound-studio"
 },
 {
-    label: "Code Generation",
+    label: "Code Builder",
     icon: CodeIcon,
     color: "text-emerald-500",
     bgColor: "bg-emerald-500/10",
