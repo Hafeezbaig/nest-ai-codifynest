@@ -3,7 +3,7 @@
 import axios from "axios";
 import * as z from "zod";
 import { Heading } from "@/components/heading";
-import { MessageSquare } from "lucide-react";
+import { Code } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { formSchema } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,7 +43,7 @@ const formatContent = (content: string) => {
   
   
 
-const ConversationPage = () => {
+const CodePage = () => {
   const router = useRouter();
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
 
@@ -66,7 +66,7 @@ const ConversationPage = () => {
       const newMessages = [...messages, userMessage];
 
       // Call the backend API
-      const response = await axios.post("/api/chat", { messages: newMessages });
+      const response = await axios.post("/api/code", { messages: newMessages });
 
       // Update messages with the response data
       setMessages((current) => [...current, userMessage, { role: "system", content: response.data.content }]);
@@ -81,11 +81,11 @@ const ConversationPage = () => {
   return (
     <div>
       <Heading
-        title="Nest Chat"
-        description="Connect and converse effortlessly with Nest AI."
-        icon={MessageSquare}
-        iconColor="text-indigo-500"
-        bgColor="bg-indigo-500/10"
+        title="Code Builder"
+        description="Build and refine your code effortlessly with Nest AI."
+        icon={Code}
+        iconColor="text-emerald-500"
+        bgColor="bg-emerald-500/10"
       />
       <div className="px-4 lg:px-8">
         <div>
@@ -114,7 +114,7 @@ const ConversationPage = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="Can you explain the basics of machine learning?"
+                        placeholder="How do I write a Python function to sort a list?"
                         {...field}
                       />
                     </FormControl>
@@ -163,4 +163,4 @@ const ConversationPage = () => {
   );
 };
 
-export default ConversationPage;
+export default CodePage;

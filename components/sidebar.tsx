@@ -9,13 +9,15 @@ import { Montserrat } from "next/font/google";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import { CodeIcon, HomeIcon, ImageIcon,
+import { CircleHelp, CodeIcon, HomeIcon,
+    //  ImageIcon,
     // LayoutDashboard,
     MessageSquare, 
-    MessageSquareCode, 
-    MusicIcon, 
+    // MessageSquareCode, 
+    // MusicIcon, 
     Settings2Icon, 
-    VideoIcon} from "lucide-react";
+    // VideoIcon
+} from "lucide-react";
 
 
 
@@ -38,35 +40,41 @@ const routes = [
         href: "/chat",
         color: "text-indigo-500"
     },
-    {
-        label: "Nest Pro Chat",
-        icon: MessageSquareCode,
-        href: "/pro-chat",
-        color: "text-blue-500"
-    },
-    {
-        label: "Image Studio",
-        icon: ImageIcon,
-        href: "/image-studio",
-        color: "text-purple-500"
-    },
-    {
-        label: "Video Studio",
-        icon: VideoIcon,
-        href: "/video-studio",
-        color: "text-orange-500"
-    },
-    {
-        label: "Sound Studio",
-        icon: MusicIcon,
-        href: "/sound-studio",
-        color: "text-cyan-500"
-    },
+    // {
+    //     label: "Nest Pro Chat",
+    //     icon: MessageSquareCode,
+    //     href: "/pro-chat",
+    //     color: "text-blue-500"
+    // },
+    // {
+    //     label: "Image Studio",
+    //     icon: ImageIcon,
+    //     href: "/image-studio",
+    //     color: "text-purple-500"
+    // },
+    // {
+    //     label: "Video Studio",
+    //     icon: VideoIcon,
+    //     href: "/video-studio",
+    //     color: "text-orange-500"
+    // },
+    // {
+    //     label: "Sound Studio",
+    //     icon: MusicIcon,
+    //     href: "/sound-studio",
+    //     color: "text-cyan-500"
+    // },
     {
         label: "Code Builder",
         icon: CodeIcon,
         href: "/code",
         color: "text-emerald-500"
+    },
+    {
+        label: "What's New?",
+        icon: CircleHelp,
+        href: "/updates",
+        color: "text-blue-500"
     },
     {
         label: "Settings",

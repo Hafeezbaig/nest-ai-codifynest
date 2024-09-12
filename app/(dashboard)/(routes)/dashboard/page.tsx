@@ -2,7 +2,13 @@
 
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { ArrowRight, ImageIcon, MessageSquare, MessageSquareCode, VideoIcon, MusicIcon, CodeIcon } from "lucide-react";
+import { ArrowRight,
+    //  ImageIcon,
+      MessageSquare,
+    //    MessageSquareCode,
+        // VideoIcon, MusicIcon,
+         CodeIcon,
+          CircleHelp } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 const tools = [
@@ -14,40 +20,48 @@ const tools = [
     bgColor: "bg-indigo-500/10",
     href: "/chat"
 },   
-{
-    label: "Nest Pro Chat",
-    icon: MessageSquareCode,
-    color: "text-blue-500",
-    bgColor: "bg-blue-500/10",
-    href: "/pro-chat"
-},
-{
-    label: "Image Studio",
-    icon: ImageIcon,
-    color: "text-purple-500",
-    bgColor: "bg-purple-500/10",
-    href: "/image-studio"
-},
-{
-    label: "Video Studio",
-    icon: VideoIcon,
-    color: "text-orange-500",
-    bgColor: "bg-orange-500/10",
-    href: "/video-studio"
-},
-{
-    label: "Sound Studio",
-    icon: MusicIcon,
-    color: "text-cyan-500",
-    bgColor: "bg-cyan-500/10",
-    href: "/sound-studio"
-},
+// {
+//     label: "Nest Pro Chat",
+//     icon: MessageSquareCode,
+//     color: "text-blue-500",
+//     bgColor: "bg-blue-500/10",
+//     href: "/pro-chat"
+// },
+// {
+//     label: "Image Studio",
+//     icon: ImageIcon,
+//     color: "text-purple-500",
+//     bgColor: "bg-purple-500/10",
+//     href: "/image-studio"
+// },
+// {
+//     label: "Video Studio",
+//     icon: VideoIcon,
+//     color: "text-orange-500",
+//     bgColor: "bg-orange-500/10",
+//     href: "/video-studio"
+// },
+// {
+//     label: "Sound Studio",
+//     icon: MusicIcon,
+//     color: "text-cyan-500",
+//     bgColor: "bg-cyan-500/10",
+//     href: "/sound-studio"
+// },
+
 {
     label: "Code Builder",
     icon: CodeIcon,
     color: "text-emerald-500",
     bgColor: "bg-emerald-500/10",
     href: "/code"
+},
+{
+    label: "What's New?",
+    icon: CircleHelp,
+    color: "text-blue-500",
+    bgColor: "bg-blue-500/10",
+    href: "/updates"
 }
 ]
 
@@ -58,10 +72,10 @@ const DashboardPage = () => {
         <div>
             <div className="mb-8 space-y-4">
                 <h2 className="text-2xl md:text-4xl font-bold text-center">
-                    Explore the power of AI
+                Explore Generative AI’s Power
                 </h2>
                 <p className="text-muted-foreground font-light text-sm md:text-lg text-center">
-                Chat with the smartest AI - Explore the power of AI
+                Interact with advanced AI and unlock its potential.
                 </p>                      
             </div>
             <div className="px-4 md:px-20 lg:px-32 space-y-4">
