@@ -127,7 +127,7 @@ const ConversationPage = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent text-base"
                         disabled={isLoading}
-                        placeholder="Can you explain the basics of machine learning?"
+                        placeholder="Start typing your question..."
                         {...field}
                       />
                     </FormControl>
@@ -173,9 +173,9 @@ const ConversationPage = () => {
                     onClick={() => handleCopy(message.content)}
                   >
                     {copyStatus[message.content] ? (
-                      <Check className="text-green-500" size={20} />
+                      <Check className="text-green-500" size={15} />
                     ) : (
-                      <Copy size={20} />
+                      <Copy size={15} />
                     )}
                   </button>
                 )}
