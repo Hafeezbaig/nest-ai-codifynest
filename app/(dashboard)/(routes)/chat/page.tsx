@@ -3,7 +3,7 @@
 
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, FormEvent } from "react";
 import axios from "axios";
 import * as z from "zod";
 import { Heading } from "@/components/heading";
@@ -14,7 +14,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import { Empty } from "@/components/empty";
 import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
@@ -24,7 +23,6 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
 const ChatPage = () => {
-  const router = useRouter();
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [copiedMessage, setCopiedMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,7 +34,12 @@ const ChatPage = () => {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const values = form.getValues();
+    
+    if (!values.prompt) return;
+
     try {
       setIsLoading(true);
       const userMessage = {
@@ -73,7 +76,7 @@ const ChatPage = () => {
   };
 
   return (
-    <div>
+    <div className="pb-20">
       <Heading
         title="Nest Chat"
         description="Connect and converse effortlessly with Nest AI."
@@ -85,7 +88,7 @@ const ChatPage = () => {
         <div>
           <Form {...form}>
             <form
-              onSubmit={form.handleSubmit(onSubmit)}
+              onSubmit={onSubmit}
               className="
                 rounded-lg
                 border
