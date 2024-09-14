@@ -9,7 +9,9 @@ import { Montserrat } from "next/font/google";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import { CircleHelp, CodeIcon, HomeIcon,
+import { CircleHelp, 
+    // CodeIcon, 
+    HomeIcon,
     //  ImageIcon,
     // LayoutDashboard,
     MessageSquare, 
@@ -64,12 +66,12 @@ const routes = [
     //     href: "/sound-studio",
     //     color: "text-cyan-500"
     // },
-    {
-        label: "Code Builder",
-        icon: CodeIcon,
-        href: "/code",
-        color: "text-emerald-500"
-    },
+    // {
+    //     label: "Code Builder",
+    //     icon: CodeIcon,
+    //     href: "/code",
+    //     color: "text-emerald-500"
+    // },
     {
         label: "What's New?",
         icon: CircleHelp,

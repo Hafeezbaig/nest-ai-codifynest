@@ -7,7 +7,7 @@ import { ArrowRight,
       MessageSquare,
     //    MessageSquareCode,
         // VideoIcon, MusicIcon,
-         CodeIcon,
+        //  CodeIcon,
           CircleHelp } from "lucide-react";
 import { useRouter } from "next/navigation";
 
@@ -49,13 +49,13 @@ const tools = [
 //     href: "/sound-studio"
 // },
 
-{
-    label: "Code Builder",
-    icon: CodeIcon,
-    color: "text-emerald-500",
-    bgColor: "bg-emerald-500/10",
-    href: "/code"
-},
+// {
+//     label: "Code Builder",
+//     icon: CodeIcon,
+//     color: "text-emerald-500",
+//     bgColor: "bg-emerald-500/10",
+//     href: "/code"
+// },
 {
     label: "What's New?",
     icon: CircleHelp,
