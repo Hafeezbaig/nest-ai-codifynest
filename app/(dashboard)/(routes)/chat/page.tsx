@@ -5,7 +5,7 @@
 import axios from "axios";
 import * as z from "zod";
 import { Heading } from "@/components/heading";
-import { MessageSquare } from "lucide-react";
+import { MessageSquare, Copy, Check } from "lucide-react"; // Import the Copy and Check icons
 import { useForm } from "react-hook-form";
 import { formSchema } from "./constants";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,6 +19,8 @@ import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
+import Footer from "@/components/footer"; // Import the Footer component
+import Head from "next/head"; // Import Head component
 
 const formatContent = (content: string) => {
     // Refined content formatting for cleaner and slightly spaced output
@@ -40,14 +42,11 @@ const formatContent = (content: string) => {
   
     return wrappedContent;
   };
-  
-  
-  
-  
 
 const ConversationPage = () => {
   const router = useRouter();
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
+  const [copyStatus, setCopyStatus] = useState<{ [key: string]: boolean }>({}); // State for copy/check status
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -72,6 +71,9 @@ const ConversationPage = () => {
 
       // Update messages with the response data
       setMessages((current) => [...current, userMessage, { role: "system", content: response.data.content }]);
+
+      // Reset the input field
+      form.reset({ prompt: "" });
     } catch (error: any) {
       console.error("Error during chat generation:", error.response?.data || error.message || error);
       alert("An error occurred while generating the response. Please try again.");
@@ -80,8 +82,17 @@ const ConversationPage = () => {
     }
   };
 
+  const handleCopy = (content: string) => {
+    navigator.clipboard.writeText(content);
+    setCopyStatus((prev) => ({ ...prev, [content]: true })); // Set the status to show the check icon
+    setTimeout(() => setCopyStatus((prev) => ({ ...prev, [content]: false })), 2000); // Reset the status after 2 seconds
+  };
+
   return (
-    <div>
+    <div className="flex flex-col min-h-screen">
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+      </Head>
       <Heading
         title="Nest Chat"
         description="Connect and converse effortlessly with Nest AI."
@@ -89,7 +100,7 @@ const ConversationPage = () => {
         iconColor="text-indigo-500"
         bgColor="bg-indigo-500/10"
       />
-      <div className="px-4 lg:px-8">
+      <div className="px-4 lg:px-8 flex-1">
         <div>
           <Form {...form}>
             <form
@@ -114,9 +125,9 @@ const ConversationPage = () => {
                   <FormItem className="col-span-12 lg:col-span-10">
                     <FormControl className="m-0 p-0">
                       <Input
-                        className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
+                        className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent text-base"
                         disabled={isLoading}
-                        placeholder="Can you explain the basics of machine learning?"
+                        placeholder="Start typing your question..."
                         {...field}
                       />
                     </FormControl>
@@ -147,20 +158,33 @@ const ConversationPage = () => {
               <div
                 key={message.content}
                 className={cn(
-                  "p-8 w-full flex items-start gap-x-8 rounded-lg",
+                  "p-8 w-full flex items-start gap-x-8 rounded-lg relative", // Added 'relative' to ensure button positioning
                   message.role === "user" ? "bg-black text-white border border-black/10" : "bg-black text-white"
                 )}
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
                 <p
-                  className="text-sm"
+                  className="text-sm flex-1"
                   dangerouslySetInnerHTML={{ __html: formatContent(message.content) }} // Render formatted content
                 />
+                {message.role === "system" && (
+                  <button
+                    className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700"
+                    onClick={() => handleCopy(message.content)}
+                  >
+                    {copyStatus[message.content] ? (
+                      <Check className="text-green-500" size={15} />
+                    ) : (
+                      <Copy size={15} />
+                    )}
+                  </button>
+                )}
               </div>
             ))}
           </div>
         </div>
       </div>
+      <Footer /> {/* Ensure the Footer is placed at the bottom */}
     </div>
   );
 };
