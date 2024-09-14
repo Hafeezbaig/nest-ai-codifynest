@@ -19,7 +19,8 @@ import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
-import Footer from "@/components/footer";
+import Footer from "@/components/footer"; // Import the Footer component
+import Head from "next/head"; // Import Head component
 
 const formatContent = (content: string) => {
     // Refined content formatting for cleaner and slightly spaced output
@@ -89,88 +90,101 @@ const ConversationPage = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <div className="flex-grow">
-        <Heading
-          title="Nest Chat"
-          description="Connect and converse effortlessly with Nest AI."
-          icon={MessageSquare}
-          iconColor="text-indigo-500"
-          bgColor="bg-indigo-500/10"
-        />
-        <div className="px-4 lg:px-8">
-          <div>
-            <Form {...form}>
-              <form
-                onSubmit={form.handleSubmit(onSubmit)}
-                className="rounded-lg border border-white/10 w-full p-4 px-3 md:px-6 focus-within:shadow-sm grid grid-cols-12 gap-2"
+      <Head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+      </Head>
+      <Heading
+        title="Nest Chat"
+        description="Connect and converse effortlessly with Nest AI."
+        icon={MessageSquare}
+        iconColor="text-indigo-500"
+        bgColor="bg-indigo-500/10"
+      />
+      <div className="px-4 lg:px-8 flex-1">
+        <div>
+          <Form {...form}>
+            <form
+              onSubmit={form.handleSubmit(onSubmit)}
+              className="
+                rounded-lg
+                border
+                border-white/10
+                w-full
+                p-4
+                px-3
+                md:px-6
+                focus-within:shadow-sm
+                grid
+                grid-cols-12
+                gap-2
+              "
+            >
+              <FormField
+                name="prompt"
+                render={({ field }) => (
+                  <FormItem className="col-span-12 lg:col-span-10">
+                    <FormControl className="m-0 p-0">
+                      <Input
+                        className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent text-base"
+                        disabled={isLoading}
+                        placeholder="Can you explain the basics of machine learning?"
+                        {...field}
+                      />
+                    </FormControl>
+                  </FormItem>
+                )}
+              />
+              <Button
+                className="col-span-12 lg:col-span-2 border border-white/10 hover:shadow-[0_2px_2px_rgba(255,255,255,0.3)] w-full"
+                disabled={isLoading}
               >
-                <FormField
-                  name="prompt"
-                  render={({ field }) => (
-                    <FormItem className="col-span-12 lg:col-span-10">
-                      <FormControl className="m-0 p-0">
-                        <Input
-                          className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
-                          disabled={isLoading}
-                          placeholder="Can you explain the basics of machine learning?"
-                          {...field}
-                        />
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-                <Button
-                  className="col-span-12 lg:col-span-2 border border-white/10 hover:shadow-[0_2px_2px_rgba(255,255,255,0.3)] w-full"
-                  disabled={isLoading}
-                >
-                  Generate
-                </Button>
-              </form>
-            </Form>
-          </div>
-          <div className="space-y-4 mt-4">
-            {/* add true here instead of isLoading to view the loader in action */}
-            {isLoading && (
-              <div className="p-8 rounded-lg w-full flex items-center justify-center" style={{ backgroundColor: 'transparent' }}>
-                <Loader />
-              </div>
-            )}
-            {messages.length === 0 && !isLoading && (
-              <Empty label="No Conversation Started." />
-            )}
-            <div className="flex flex-col-reverse gap-y-4">
-              {messages.map((message) => (
-                <div
-                  key={message.content}
-                  className={cn(
-                    "p-8 w-full flex items-start gap-x-8 rounded-lg relative", // Added 'relative' to ensure button positioning
-                    message.role === "user" ? "bg-black text-white border border-black/10" : "bg-black text-white"
-                  )}
-                >
-                  {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-                  <p
-                    className="text-sm flex-1"
-                    dangerouslySetInnerHTML={{ __html: formatContent(message.content) }} // Render formatted content
-                  />
-                  {message.role === "system" && (
-                    <button
-                      className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700"
-                      onClick={() => handleCopy(message.content)}
-                    >
-                      {copyStatus[message.content] ? (
-                        <Check className="text-green-500" size={20} />
-                      ) : (
-                        <Copy size={20} />
-                      )}
-                    </button>
-                  )}
-                </div>
-              ))}
+                Generate
+              </Button>
+            </form>
+          </Form>
+        </div>
+        <div className="space-y-4 mt-4">
+          {/* add true here instead of isLoading to view the loader in action */}
+          {isLoading && (
+            <div className="p-8 rounded-lg w-full flex items-center justify-center" style={{ backgroundColor: 'transparent' }}>
+              <Loader />
             </div>
+          )}
+          {messages.length === 0 && !isLoading && (
+            <Empty label="No Conversation Started." />
+          )}
+          <div className="flex flex-col-reverse gap-y-4">
+            {messages.map((message) => (
+              <div
+                key={message.content}
+                className={cn(
+                  "p-8 w-full flex items-start gap-x-8 rounded-lg relative", // Added 'relative' to ensure button positioning
+                  message.role === "user" ? "bg-black text-white border border-black/10" : "bg-black text-white"
+                )}
+              >
+                {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
+                <p
+                  className="text-sm flex-1"
+                  dangerouslySetInnerHTML={{ __html: formatContent(message.content) }} // Render formatted content
+                />
+                {message.role === "system" && (
+                  <button
+                    className="absolute top-2 right-2 p-2 text-gray-500 hover:text-gray-700"
+                    onClick={() => handleCopy(message.content)}
+                  >
+                    {copyStatus[message.content] ? (
+                      <Check className="text-green-500" size={20} />
+                    ) : (
+                      <Copy size={20} />
+                    )}
+                  </button>
+                )}
+              </div>
+            ))}
           </div>
         </div>
       </div>
-      <Footer /> {/* Footer component */}
+      <Footer /> {/* Ensure the Footer is placed at the bottom */}
     </div>
   );
 };
