@@ -155,36 +155,36 @@ const CodePage = () => {
                   <ReactMarkdown
                     remarkPlugins={[remarkGfm]} // GitHub flavored markdown for bullet points, lists, tables, etc.
                     components={{
-                      h1: ({ node, ...props }) => (
+                      h1: ({ ...props }) => (
                         <h1 className="text-2xl font-bold my-2" {...props} />
                       ),
-                      h2: ({ node, ...props }) => (
+                      h2: ({ ...props }) => (
                         <h2 className="text-xl font-semibold my-2" {...props} />
                       ),
-                      h3: ({ node, ...props }) => (
+                      h3: ({ ...props }) => (
                         <h3 className="text-lg font-semibold my-2" {...props} />
                       ),
-                      strong: ({ node, ...props }) => (
+                      strong: ({ ...props }) => (
                         <strong className="font-bold" {...props} />
                       ),
-                      ul: ({ node, ...props }) => (
+                      ul: ({ ...props }) => (
                         <ul className="list-disc pl-5 my-2" {...props} />
                       ),
-                      ol: ({ node, ...props }) => (
+                      ol: ({ ...props }) => (
                         <ol className="list-decimal pl-5 my-2" {...props} />
                       ),
-                      li: ({ node, ...props }) => (
+                      li: ({ ...props }) => (
                         <li className="my-1" {...props} />
                       ),
-                      pre: ({ node, ...props }) => (
+                      pre: ({ ...props }) => (
                         <div className="overflow-auto w-full my-2 bg-white/10 p-2 rounded-lg">
                           <pre {...props} />
                         </div>
                       ),
-                      code: ({ node, ...props }) => (
+                      code: ({ ...props }) => (
                         <code className="bg-white/20 rounded-lg p-1" {...props} />
                       ),
-                      p: ({ node, ...props }) => (
+                      p: ({ ...props }) => (
                         <p className="my-2 leading-relaxed" {...props} /> // Add spacing between paragraphs
                       ),
                     }}
