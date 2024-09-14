@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 
 "use client";
 
@@ -20,8 +19,6 @@ import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
 import { UserAvatar } from "@/components/user-avatar";
 import { BotAvatar } from "@/components/bot-avatar";
-import ReactMarkdown from "react-markdown";
-import remarkGfm from "remark-gfm";
 
 const formatContent = (content: string) => {
     // Refined content formatting for cleaner and slightly spaced output
@@ -119,7 +116,7 @@ const ConversationPage = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
-                        placeholder="Type your prompt here..."
+                        placeholder="Type your prompt here...v2"
                         {...field}
                       />
                     </FormControl>
@@ -155,47 +152,10 @@ const ConversationPage = () => {
                 )}
               >
                 {message.role === "user" ? <UserAvatar /> : <BotAvatar />}
-
-                <ReactMarkdown
-                  remarkPlugins={[remarkGfm]} // GitHub flavored markdown for bullet points, lists, tables, etc.
-                  components={{
-                    h1: ({ node, ...props }) => (
-                      <h1 className="text-2xl font-bold my-2" {...props} />
-                    ),
-                    h2: ({ node, ...props }) => (
-                      <h2 className="text-xl font-semibold my-2" {...props} />
-                    ),
-                    h3: ({ node, ...props }) => (
-                      <h3 className="text-lg font-semibold my-2" {...props} />
-                    ),
-                    strong: ({ node, ...props }) => (
-                      <strong className="font-bold" {...props} />
-                    ),
-                    ul: ({ node, ...props }) => (
-                      <ul className="list-disc pl-5 my-2" {...props} />
-                    ),
-                    ol: ({ node, ...props }) => (
-                      <ol className="list-decimal pl-5 my-2" {...props} />
-                    ),
-                    li: ({ node, ...props }) => (
-                      <li className="my-1" {...props} />
-                    ),
-                    pre: ({ node, ...props }) => (
-                      <div className="overflow-auto w-full my-2 bg-white/10 p-2 rounded-lg">
-                        <pre {...props} />
-                      </div>
-                    ),
-                    code: ({ node, ...props }) => (
-                      <code className="bg-white/20 rounded-lg p-1" {...props} />
-                    ),
-                    p: ({ node, ...props }) => (
-                      <p className="my-2 leading-relaxed" {...props} /> // Add spacing between paragraphs
-                    ),
-                  }}
-                  className="text-sm overflow-hidden leading-7"
-                >
-                  {message.content || ""}
-                </ReactMarkdown>
+                <p
+                  className="text-sm"
+                  dangerouslySetInnerHTML={{ __html: formatContent(message.content) }} // Render formatted content
+                />
               </div>
             ))}
           </div>
